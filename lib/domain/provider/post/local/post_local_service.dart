@@ -54,7 +54,7 @@ class PostLocalService implements InterfaceProvider<Post> {
   @override
   Future<bool> isDataAvailable() async {
     try {
-      return _productsBox.isEmpty;
+      return _productsBox.isNotEmpty;
     } catch (e) {
       // Handle error checking box emptiness
       logger.e('Error checking if box is empty: $e');

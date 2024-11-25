@@ -18,7 +18,7 @@ class PostRepository {
         await di<InternetConnectionServices>().checkInternetConnection();
 
     /// is DataBase local Empty or Not
-    final bool isDataBaseEmpty = await _postLocalProvider.isPostDataAvailable();
+    final bool isDataBaseLocalNotEmpty = await _postLocalProvider.isPostDataAvailable();
 
     // jika ada koneksi/ connection true
     if (isInternetConnected) {
@@ -44,7 +44,7 @@ class PostRepository {
         /// Unknown Error
         else {
           /// Read From DB
-          if (!isDataBaseEmpty) {
+          if (isDataBaseLocalNotEmpty) {
             logger.d('Load [Post] from Local DataBase');
 
             final Post? localPostData = await _postLocalProvider.getPosts();
@@ -55,7 +55,7 @@ class PostRepository {
           return throw Exception("Unknown Error Happened!");
         }
       } catch (e) {
-        if (!isDataBaseEmpty) {
+        if (isDataBaseLocalNotEmpty) {
           logger.d('Load [Post] from Local DataBase');
           final Post? localPostData = await _postLocalProvider.getPosts();
           return localPostData!;
@@ -72,7 +72,7 @@ class PostRepository {
     // !jika tidak ada internet
     else {
       // ! jika database tidak kosong
-      if (!isDataBaseEmpty) {
+      if (isDataBaseLocalNotEmpty) {
         logger.d('Load [Post] from Local DataBase');
         final Post? localPostData = await _postLocalProvider.getPosts();
         return localPostData!;
