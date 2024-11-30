@@ -36,9 +36,10 @@ class PostLocalService implements InterfaceProvider<List<Post>> {
     } catch (e) {
       // Handle read errors
       logger.e('Error reading from database: $e');
+      throw Exception('Error reading from database: $e');
     }
 
-    return [];
+    // return [];
   }
 
   // insert data to database local

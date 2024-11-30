@@ -107,9 +107,10 @@ class _HomePageState extends State<HomePage> {
           } else if (state is PostLoaded) {
             return _buildPostList(state.posts);
           } else if (state is PostError) {
-            return Center(child: Text('Error: ${state.error}'));
+
+            return Center(child: Text('Sorry, Please Connect your device to the internet'));
           } else {
-            return Center(child: Text('No posts available.'));
+            return Center(child: Text('Something Went Wrong'));
           }
         },
       ),

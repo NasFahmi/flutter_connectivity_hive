@@ -16,6 +16,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       emit(PostLoading());
       try {
         final response = await _postRepository.getPost();
+        if (response.isEmpty) {
+          emit(PostError(error: 'No data found'));  
+        }
         emit(PostLoaded(posts: response));
       } catch (e) {
         emit(PostError(error: e.toString()));

@@ -49,8 +49,11 @@ class PostRepository {
   Future<List<Post>> _loadLocalPost(bool isDataBaseLocalNotEmpty) async {
     if (isDataBaseLocalNotEmpty) {
       logger.d('Load [Post] from Local DataBase');
-      final List<Post>? localPostData = await _postLocalProvider.getPosts();
-      return localPostData ?? []; // Mengembalikan daftar kosong jika tidak ada data
+      List<Post>? localPostData = await _postLocalProvider.getPosts();
+      if (localPostData!.isNotEmpty) {
+        return localPostData;
+      }
+      throw Exception('No Network Connection and Local Database is Empty!');
     } else {
       throw Exception('No Network Connection and Local Database is Empty!');
     }

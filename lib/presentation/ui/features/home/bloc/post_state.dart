@@ -11,9 +11,9 @@ final class PostInitial extends PostState {}
 final class PostLoading extends PostState {}
 final class PostLoaded extends PostState {
   final List<Post> posts;
-  PostLoaded({required this.posts});
+  const PostLoaded({required this.posts});
 }
 final class PostError extends PostState {
-  String error;
-  PostError({required this.error});
+  final String error;
+  const PostError({required this.error});
 }
