@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:connectivity_hive_bloc/domain/services/token_service.dart';
-import 'package:connectivity_hive_bloc/domain/services/utils/logger.dart';
+import 'package:connectivity_hive_bloc/config/utils/logger.dart';
 import 'package:dio/dio.dart';
 
 class ApiResponse<T> {
@@ -125,7 +125,7 @@ class ApiClient {
         options: Options(headers: headers),
       );
       logger.d(
-          "fetching api get, status code ${response.statusCode} data ${response.data}");
+          "fetching api get, status code ${response.statusCode}");
       return _handleResponse<T>(response);
     } catch (e) {
       throw ApiException(message: 'Network error: $e');

@@ -4,10 +4,10 @@ import 'package:connectivity_hive_bloc/config/utils/dependenci_injector.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  init();
+  await init();
   runApp(const AppScope());
 }
 class AppScope extends StatelessWidget {

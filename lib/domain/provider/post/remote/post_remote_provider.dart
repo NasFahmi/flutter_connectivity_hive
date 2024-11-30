@@ -1,18 +1,19 @@
 import 'package:connectivity_hive_bloc/config/api/EndPoints.dart';
 import 'package:connectivity_hive_bloc/domain/model/post.dart';
 import 'package:connectivity_hive_bloc/domain/services/api_client.dart';
-import 'package:connectivity_hive_bloc/domain/services/utils/dependenci_injector.dart';
-import 'package:connectivity_hive_bloc/domain/services/utils/logger.dart';
+import 'package:connectivity_hive_bloc/config/utils/dependenci_injector.dart';
+import 'package:connectivity_hive_bloc/config/utils/logger.dart';
 
 class PostRemoteProvider {
   ApiClient _apiClient = di<ApiClient>();
-  Future<Post> fetchAllPosts() async {
+  Future<List<Post>> fetchAllPosts() async {
     try {
       final response = await _apiClient.get(Endpoints.post);
       if (response.statusCode == 200) {
         // If the server returns an OK response,
         // then parse the JSON.
-        final posts = Post.fromJson(response.data);
+        List<dynamic> jsonData = response.data; // Ensure this is a List
+        List<Post> posts = jsonData.map((post) => Post.fromJson(post)).toList();
         logger.d('Succesfull fecthing posts');
         return posts;
       }

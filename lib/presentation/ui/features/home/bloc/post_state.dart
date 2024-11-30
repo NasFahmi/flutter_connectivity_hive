@@ -10,7 +10,7 @@ sealed class PostState extends Equatable {
 final class PostInitial extends PostState {}
 final class PostLoading extends PostState {}
 final class PostLoaded extends PostState {
-  final Post posts;
+  final List<Post> posts;
   PostLoaded({required this.posts});
 }
 final class PostError extends PostState {
