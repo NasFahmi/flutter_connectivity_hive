@@ -3,6 +3,7 @@ import 'package:connectivity_hive_bloc/main.dart';
 import 'package:connectivity_hive_bloc/presentation/ui/features/auth/view/login_page.dart';
 import 'package:connectivity_hive_bloc/presentation/ui/features/auth/view/register_page.dart';
 import 'package:connectivity_hive_bloc/presentation/ui/features/home/view/home.dart';
+import 'package:connectivity_hive_bloc/presentation/ui/features/infinite_scroll/view/infinite_scroll.dart';
 import 'package:connectivity_hive_bloc/presentation/ui/not_found.dart';
 import 'package:flutter/material.dart';
 
@@ -18,13 +19,17 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => const LoginPageScope(),
         );
-        case RouteName.register:
+      case RouteName.register:
         return MaterialPageRoute(
           builder: (_) => const RegisterPageScope(),
         );
-        case RouteName.home:
+      case RouteName.home:
         return MaterialPageRoute(
           builder: (_) => const HomeScope(),
+        );
+      case RouteName.infiniteScroll:
+        return MaterialPageRoute(
+          builder: (_) => const InfiniteScrollScope(),
         );
       default:
         return MaterialPageRoute(

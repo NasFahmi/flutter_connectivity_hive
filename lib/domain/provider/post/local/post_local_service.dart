@@ -16,12 +16,12 @@ class PostLocalService implements InterfaceProvider<List<Post>> {
   /// init DB local
   Future<void> initDataBase() async {
     try {
-      Hive.registerAdapter(PostAdapter());
-      _postsBox = await Hive.openBox(_key);
+      // Hive.registerAdapter(PostAdapter());
+      _postsBox = await Hive.openBox<List<Post>>(_key);
       logger.d('Success on initializing database For *Post*');
     } catch (e) {
       // Handle initialization errors
-      logger.e('Error initializing database For *postModel*');
+      logger.e('Error initializing database For *post*');
     }
   }
 

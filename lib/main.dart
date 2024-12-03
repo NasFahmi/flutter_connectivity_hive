@@ -1,6 +1,7 @@
 import 'package:connectivity_hive_bloc/config/routes/route_name.dart';
 import 'package:connectivity_hive_bloc/config/routes/routes.dart';
 import 'package:connectivity_hive_bloc/config/utils/dependenci_injector.dart';
+import 'package:connectivity_hive_bloc/domain/provider/post/local/post_infinite_local_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

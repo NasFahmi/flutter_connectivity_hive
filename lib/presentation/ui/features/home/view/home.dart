@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity_hive_bloc/config/routes/route_name.dart';
 import 'package:connectivity_hive_bloc/config/utils/dependenci_injector.dart';
 import 'package:connectivity_hive_bloc/config/utils/logger.dart';
 import 'package:connectivity_hive_bloc/domain/services/internet_connection_services.dart';
@@ -100,19 +101,33 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: BlocBuilder<PostBloc, PostState>(
-        builder: (context, state) {
-          if (state is PostLoading) {
-            return Center(child: CircularProgressIndicator());
-          } else if (state is PostLoaded) {
-            return _buildPostList(state.posts);
-          } else if (state is PostError) {
-
-            return Center(child: Text('Sorry, Please Connect your device to the internet'));
-          } else {
-            return Center(child: Text('Something Went Wrong'));
-          }
-        },
+      body: SafeArea(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, RouteName.infiniteScroll);
+              },
+              child: Text('Go To InfiniteScroll'),
+            ),
+            Expanded(
+              child: BlocBuilder<PostBloc, PostState>(
+                builder: (context, state) {
+                  if (state is PostLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is PostLoaded) {
+                    return _buildPostList(state.posts);
+                  } else if (state is PostError) {
+              
+                    return Center(child: Text('Sorry, Please Connect your device to the internet'));
+                  } else {
+                    return Center(child: Text('Something Went Wrong'));
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

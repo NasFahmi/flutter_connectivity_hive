@@ -27,4 +27,28 @@ class PostRemoteProvider {
       throw Exception('Failed to load posts ${e}');
     }
   }
+
+  Future<List<Post>> fetchPostLimit(int start, int limit) async {
+    try {
+      final response =
+          await _apiClient.get('${Endpoints.post}?start=$start&limit=$limit');
+      if (response.statusCode == 200) {
+        // If the server returns an OK response,
+        // then parse the JSON.
+        List<dynamic> jsonData = response.data; // Ensure this is a List
+        List<Post> posts = jsonData.map((post) => Post.fromJson(post)).toList();
+        logger.d(
+            'Succesfull fecthing posts start with $start and limit with $limit');
+        return posts;
+      }
+
+      // If the server did not return an OK response,
+      // then throw an exception.
+      logger.d('failed fecthing posts with start $start and limit $limit');
+      throw Exception('Failed to load posts');
+    } catch (e) {
+      logger.d('failed fecthing posts ${e}');
+      throw Exception('Failed to load posts ${e}');
+    }
+  }
 }
