@@ -31,14 +31,14 @@ class PostRemoteProvider {
   Future<List<Post>> fetchPostLimit(int start, int limit) async {
     try {
       final response =
-          await _apiClient.get('${Endpoints.post}?start=$start&limit=$limit');
+          await _apiClient.get('${Endpoints.post}?_start=$start&_limit=$limit');
       if (response.statusCode == 200) {
         // If the server returns an OK response,
         // then parse the JSON.
         List<dynamic> jsonData = response.data; // Ensure this is a List
         List<Post> posts = jsonData.map((post) => Post.fromJson(post)).toList();
         logger.d(
-            'Succesfull fecthing posts start with $start and limit with $limit');
+            'Succesfull fecthing posts start with $start and limit with $limit with total ${posts.length}');
         return posts;
       }
 

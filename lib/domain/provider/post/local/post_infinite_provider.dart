@@ -24,7 +24,7 @@ class PostInfiniteProvider {
     try {
       await _postInfiniteLocalService.insertItem(object: posts);
     } catch (e) {
-      logger.e('Error inserting Products: $e');
+      logger.e('Error inserting Post: $e');
     }
   }
 

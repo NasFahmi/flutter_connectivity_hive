@@ -82,7 +82,7 @@ class PostInfiniteLocalService implements InterfaceProvider<List<Post>> {
   Future<void> insertItem({required List<Post> object}) async {
     try {
       if (_postsInfiniteBox.isOpen) {
-        List<Post>? existingPosts = _postsInfiniteBox.get(_key) ?? [];
+        List<dynamic>? existingPosts = _postsInfiniteBox.get(_key) ?? [];
         // Create a new list to avoid modifying the original
         List<Post> updatedPosts = List<Post>.from(existingPosts);
         // Add new posts, avoiding duplicates

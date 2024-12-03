@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:connectivity_hive_bloc/config/utils/logger.dart';
 import 'package:connectivity_hive_bloc/domain/model/post.dart';
 import 'package:connectivity_hive_bloc/presentation/ui/features/infinite_scroll/repository/postInfiniteRepository.dart';
 import 'package:equatable/equatable.dart';
@@ -29,15 +30,16 @@ class PostInfiniteBloc extends Bloc<PostInfiniteEvent, PostInfiniteState> {
 
     try {
       if (state is PostInfiniteInitial) {
-        // First load
+        // ketika pertama kali terload
         final posts = await repository.getPostWithLimit(0, _limit);
-        
+        logger.d('post initial fetching : $posts with page : $_page and limit : $_limit');
         emit(PostInfiniteLoaded(
           posts: posts, 
           hasReachedMax: posts.length < _limit
         ));
         _page++;
       } else if (state is PostInfiniteLoaded) {
+        // ketika bukan pertama kali terload
         final currentState = state as PostInfiniteLoaded;
         final newPosts = await repository.getPostWithLimit(_page * _limit, _limit);
 
